@@ -6,9 +6,10 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/onboarding_system";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Samudraveni@123";
+    private static final String URL = System.getenv("DB_URL") != null ? System.getenv("DB_URL")
+            : "jdbc:mysql://mysql-36700ef0-onboardingsystem2026.f.aivencloud.com:23649/defaultdb?sslMode=REQUIRED";
+    private static final String USER = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "avnadmin";
+    private static final String PASSWORD = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "";
 
     public static Connection getConnection() {
         Connection conn = null;
