@@ -1,0 +1,221 @@
+/* ===== Global Reset & Base ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f6fa;
+    color: #2d2d2d;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h2 {
+    color: #4b0082;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #ff6600;
+    display: inline-block;
+    padding-bottom: 6px;
+}
+
+h3 {
+    color: #6a0dad;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+a {
+    color: #6a0dad;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #ff6600;
+}
+
+/* ===== Buttons ===== */
+button, .btn {
+    background: linear-gradient(135deg, #8e2de2, #6a0dad);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.3);
+}
+
+/* Reject/Danger buttons (second button in verification rows) */
+form + form button {
+    background: linear-gradient(135deg, #ff5f6d, #c21500);
+    margin-left: 8px;
+}
+
+/* ===== Forms ===== */
+form {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    max-width: 420px;
+    margin-top: 15px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #444;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #8e2de2;
+    box-shadow: 0 0 0 3px rgba(142, 45, 226, 0.15);
+}
+
+/* ===== Tables ===== */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background: linear-gradient(135deg, #6a0dad, #4b0082);
+    color: white;
+    font-weight: 600;
+}
+
+tr:hover {
+    background: #f9f4ff;
+}
+
+/* ===== Status Badges ===== */
+.status-pending, .status-verified, .status-submitted, .status-rejected {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.status-pending {
+    background: #ffe4c4;
+    color: #b35900;
+}
+
+.status-submitted {
+    background: #cce5ff;
+    color: #0056b3;
+}
+
+.status-verified {
+    background: #d4edda;
+    color: #1e7e34;
+}
+
+.status-rejected {
+    background: #f8d7da;
+    color: #a71d2a;
+}
+
+/* ===== Dashboard Links List ===== */
+ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+ul li {
+    background: white;
+    margin-bottom: 8px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    border-left: 4px solid #6a0dad;
+    transition: background 0.15s;
+    max-width: 300px;
+}
+
+ul li:hover {
+    background: #f9f4ff;
+}
+
+/* ===== Welcome Header ===== */
+.welcome-box {
+    background: linear-gradient(135deg, #8e2de2, #4b0082);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.welcome-box h2 {
+    color: white;
+    border: none;
+    margin: 0;
+}
+
+/* ===== Login Page ===== */
+.login-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+/* ===== Progress Bar (for myProgress.jsp) ===== */
+.progress-bar-container {
+    width: 100%;
+    max-width: 400px;
+    background: #eee;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 24px;
+    margin-top: 10px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #8e2de2, #ff6600);
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    line-height: 24px;
+    transition: width 0.4s ease;
+}

@@ -1,0 +1,9 @@
+# Compiled classes
+web/WEB-INF/classes/
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
