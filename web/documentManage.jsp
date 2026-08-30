@@ -14,7 +14,7 @@
                 List<Employee> employees = (List<Employee>) request.getAttribute("employees");
                 for (Employee e : employees) {
             %>
-            <option value="<%= e.getEmployeeId() %>"><%= e.getName() %></option>
+            <option value="<%= e.getUserId() %>"><%= e.getName() %></option>
             <% } %>
         </select><br><br>
 
