@@ -96,4 +96,28 @@ public class TaskDAO {
             return false;
         }
     }
+
+    // Delete a task and any employee_tasks rows linked to it
+    public boolean deleteTask(int taskId) {
+        String deleteLinks = "DELETE FROM employee_tasks WHERE task_id = ?";
+        String deleteTaskSql = "DELETE FROM tasks WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection()) {
+
+            try (PreparedStatement stmt1 = conn.prepareStatement(deleteLinks)) {
+                stmt1.setInt(1, taskId);
+                stmt1.executeUpdate();
+            }
+
+            try (PreparedStatement stmt2 = conn.prepareStatement(deleteTaskSql)) {
+                stmt2.setInt(1, taskId);
+                int rows = stmt2.executeUpdate();
+                return rows > 0;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
