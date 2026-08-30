@@ -153,4 +153,47 @@ public class DocumentDAO {
             return false;
         }
     }
+
+    // Get ALL documents regardless of status (for HR history/archive view)
+    public List<Document> getAllDocuments() {
+        List<Document> docs = new ArrayList<>();
+        String sql = "SELECT d.id, d.document_name, d.status, d.file_name, u.name AS employee_name " +
+                     "FROM documents d " +
+                     "JOIN users u ON d.employee_id = u.id " +
+                     "ORDER BY d.id DESC";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Document d = new Document();
+                d.setDocumentId(rs.getInt("id"));
+                d.setDocumentName(rs.getString("document_name"));
+                d.setStatus(rs.getString("status"));
+                d.setEmployeeName(rs.getString("employee_name"));
+                d.setFileName(rs.getString("file_name"));
+                docs.add(d);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return docs;
+    }
+
+    // Permanently delete a document record
+    public boolean deleteDocument(int documentId) {
+        String sql = "DELETE FROM documents WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, documentId);
+            int rows = stmt.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
