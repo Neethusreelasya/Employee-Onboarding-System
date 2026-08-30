@@ -14,11 +14,18 @@
         <p>No documents awaiting verification.</p>
     <% } else { %>
     <table border="1" cellpadding="8">
-        <tr><th>Document (Employee)</th><th>Status</th><th>Action</th></tr>
+        <tr><th>Document (Employee)</th><th>Status</th><th>File</th><th>Action</th></tr>
         <% for (Document d : submittedDocs) { %>
         <tr>
-            <td><%= d.getDocumentName() %></td>
+            <td><%= d.getDocumentName() %> (<%= d.getEmployeeName() %>)</td>
             <td><span class="status-<%= d.getStatus().toLowerCase() %>"><%= d.getStatus() %></span></td>
+            <td>
+                <% if (d.getFileName() != null) { %>
+                    <a href="DownloadDocumentServlet?documentId=<%= d.getDocumentId() %>" target="_blank">View File</a>
+                <% } else { %>
+                    No file
+                <% } %>
+            </td>
             <td>
                 <form action="VerifyDocumentsServlet" method="post" style="display:inline;">
                     <input type="hidden" name="documentId" value="<%= d.getDocumentId() %>">

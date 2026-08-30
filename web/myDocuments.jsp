@@ -11,18 +11,20 @@
         List<Document> docs = (List<Document>) request.getAttribute("docs");
     %>
     <table border="1" cellpadding="8">
-        <tr><th>Document</th><th>Status</th><th>Action</th></tr>
+        <tr><th>Document</th><th>Status</th><th>File</th><th>Action</th></tr>
         <% for (Document d : docs) { %>
         <tr>
             <td><%= d.getDocumentName() %></td>
             <td><span class="status-<%= d.getStatus().toLowerCase() %>"><%= d.getStatus() %></span></td>
+            <td><%= d.getFileName() != null ? d.getFileName() : "Not uploaded" %></td>
             <td>
                 <% if (d.getStatus().equals("PENDING") || d.getStatus().equals("REJECTED")) { %>
-<form action="MyDocumentsServlet" method="post">
-    <input type="hidden" name="documentId" value="<%= d.getDocumentId() %>">
-    <button type="submit">Submit</button>
-</form>
-<% } %>
+                <form action="MyDocumentsServlet" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="documentId" value="<%= d.getDocumentId() %>">
+                    <input type="file" name="file" required><br><br>
+                    <button type="submit">Upload & Submit</button>
+                </form>
+                <% } %>
             </td>
         </tr>
         <% } %>

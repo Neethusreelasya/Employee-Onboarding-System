@@ -5,6 +5,9 @@ public class Document {
     private String documentName;
     private String status;
     private String employeeName;
+    private String fileName;
+    private String fileType;
+    private byte[] fileData;
 
     public Document() {}
 
@@ -16,4 +19,10 @@ public class Document {
     public void setStatus(String status) { this.status = status; }
     public String getEmployeeName() { return employeeName; }
     public void setEmployeeName(String employeeName) { this.employeeName = employeeName; }
+    public String getFileName() { return fileName; }
+    public void setFileName(String fileName) { this.fileName = fileName; }
+    public String getFileType() { return fileType; }
+    public void setFileType(String fileType) { this.fileType = fileType; }
+    public byte[] getFileData() { return fileData; }
+    public void setFileData(byte[] fileData) { this.fileData = fileData; }
 }
