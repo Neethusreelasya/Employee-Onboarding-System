@@ -98,8 +98,7 @@ public class DocumentDAO {
         List<Document> docs = new ArrayList<>();
         String sql = "SELECT d.id, d.document_name, d.status, d.file_name, u.name AS employee_name " +
                      "FROM documents d " +
-                     "JOIN employees e ON d.employee_id = e.id " +
-                     "JOIN users u ON e.user_id = u.id " +
+                     "JOIN users u ON d.employee_id = u.id " +
                      "WHERE d.status = 'SUBMITTED'";
 
         try (Connection conn = DBConnection.getConnection();
