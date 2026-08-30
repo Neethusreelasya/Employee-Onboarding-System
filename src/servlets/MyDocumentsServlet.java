@@ -7,7 +7,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,10 +24,10 @@ public class MyDocumentsServlet extends HttpServlet {
             response.sendRedirect("login.html");
             return;
         }
-
-        int employeeId = (int) session.getAttribute("employeeId");
-        DocumentDAO documentDAO = new DocumentDAO();
-        List<Document> docs = documentDAO.getDocumentsByEmployee(employeeId);
+int userId = (int) session.getAttribute("userId");
+DocumentDAO documentDAO = new DocumentDAO();
+List<Document> docs = documentDAO.getDocumentsByEmployee(userId);
+       
 
         request.setAttribute("docs", docs);
         request.getRequestDispatcher("myDocuments.jsp").forward(request, response);
