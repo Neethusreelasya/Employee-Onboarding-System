@@ -16,7 +16,13 @@
         <tr>
             <td><%= d.getDocumentName() %></td>
             <td><span class="status-<%= d.getStatus().toLowerCase() %>"><%= d.getStatus() %></span></td>
-            <td><%= d.getFileName() != null ? d.getFileName() : "Not uploaded" %></td>
+            <td>
+                <% if (d.getFileName() != null) { %>
+                    <a href="DownloadDocumentServlet?documentId=<%= d.getDocumentId() %>" target="_blank"><%= d.getFileName() %></a>
+                <% } else { %>
+                    Not uploaded
+                <% } %>
+            </td>
             <td>
                 <% if (d.getStatus().equals("PENDING") || d.getStatus().equals("REJECTED")) { %>
                 <form action="MyDocumentsServlet" method="post" enctype="multipart/form-data">
