@@ -26,7 +26,7 @@
         <li><a href="VerifyDocumentsServlet">Verify Documents</a></li>
         <li><a href="DocumentManageServlet">Manage Documents</a></li>
         <li><a href="AddAdminServlet">Add HR/Admin</a></li>
-
+        <li><a href="ListAdminsServlet">Manage Admins</a></li>
     </ul>
     <a href="LogoutServlet">Logout</a>
 </body>
