@@ -21,14 +21,13 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String expectedRole = request.getParameter("expectedRole"); // "EMPLOYEE" or "ADMIN"
+        String expectedRole = request.getParameter("expectedRole"); // "EMPLOYEE", "ADMIN", or "MANAGER"
 
         UserDAO userDAO = new UserDAO();
         User user = userDAO.validateUser(email, password);
 
         if (user != null) {
 
-            // NEW CHECK: does the actual role match the box they logged in through?
             if (!user.getRole().equalsIgnoreCase(expectedRole)) {
                 response.getWriter().println(
                     "This account is not registered as a " + expectedRole.toLowerCase() +
@@ -43,7 +42,6 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("role", user.getRole());
             session.setAttribute("email", user.getEmail());
 
-            // NEW: look up and store the employee's employees.id (only applies to EMPLOYEE role)
             if (user.getRole().equalsIgnoreCase("EMPLOYEE")) {
                 EmployeeDAO employeeDAO = new EmployeeDAO();
                 int employeeId = employeeDAO.getEmployeeIdByUserId(user.getUserId());
@@ -52,6 +50,8 @@ public class LoginServlet extends HttpServlet {
 
             if (user.getRole().equals("ADMIN")) {
                 response.sendRedirect("adminDashboard.jsp");
+            } else if (user.getRole().equals("MANAGER")) {
+                response.sendRedirect("managerDashboard.jsp");
             } else {
                 response.sendRedirect("employeeDashboard.jsp");
             }

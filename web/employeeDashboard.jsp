@@ -21,6 +21,7 @@
         <li><a href="MyTasksServlet">My Tasks</a></li>
         <li><a href="MyDocumentsServlet">Documents</a></li>
         <li><a href="MyProgressServlet">Progress</a></li>
+        <li><a href="MyLeavesServlet">My Leaves</a></li>
     </ul>
     <a href="LogoutServlet">Logout</a>
 </body>
