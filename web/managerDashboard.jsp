@@ -19,6 +19,8 @@
     </div>
     <ul>
         <li><a href="ManagerLeaveServlet">Leave Approvals</a></li>
+    <li><a href="ManagerResignationServlet">Resignation Approvals</a></li>
+    <li><a href="InitiateTerminationServlet">Terminate Employee</a></li>
     </ul>
     <a href="LogoutServlet">Logout</a>
 </body>

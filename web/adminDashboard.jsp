@@ -29,6 +29,11 @@
         <li><a href="AddAdminServlet">Add HR/Admin</a></li>
         <li><a href="ListAdminsServlet">Manage Admins</a></li>
         <li><a href="HRLeaveServlet">Manage Leaves</a></li>
+    <li><a href="HRResignationServlet">Resignation Approvals</a></li>
+<li><a href="ExitChecklistServlet">Exit Checklist</a></li>
+    <li><a href="HRTerminationServlet">Termination Approvals</a></li>
+<li><a href="TerminationChecklistServlet">Termination Exit Checklist</a></li>
+    
     </ul>
     <a href="LogoutServlet">Logout</a>
 </body>

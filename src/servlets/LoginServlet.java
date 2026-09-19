@@ -36,6 +36,14 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
 
+            // NEW CHECK: block login if the employee has resigned
+            if ("RESIGNED".equalsIgnoreCase(user.getStatus()) || "TERMINATED".equalsIgnoreCase(user.getStatus())) {
+                response.getWriter().println(
+              "This account has been deactivated. <a href='login.html'>Go back</a>"
+                );
+                return;
+            }
+
             HttpSession session = request.getSession();
             session.setAttribute("userId", user.getUserId());
             session.setAttribute("name", user.getName());

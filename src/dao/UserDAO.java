@@ -32,6 +32,7 @@ public class UserDAO {
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setRole(rs.getString("role"));
+                user.setStatus(rs.getString("status"));
             }
 
         } catch (SQLException e) {
