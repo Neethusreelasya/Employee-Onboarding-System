@@ -37,27 +37,44 @@
         <button type="submit">Create Task</button>
     </form>
 
-    <h3>Assign Task to Employee</h3>
+    <h3>Assign Task to Employee(s)</h3>
     <form action="AssignTaskServlet" method="post">
         <label>Task:</label>
-        <select name="taskId">
+        <select name="taskId" required>
             <% for (String[] t : tasks) { %>
             <option value="<%= t[0] %>"><%= t[1] %></option>
             <% } %>
         </select><br><br>
 
-        <label>Employee:</label>
-        <select name="employeeUserId">
+        <label>Select Employee(s):</label>
+        <div style="background:white; border:1px solid #ddd; border-radius:6px; padding:12px; max-width:300px; max-height:200px; overflow-y:auto; margin-top:6px;">
+            <label style="display:block; font-weight:normal; margin-bottom:8px;">
+                <input type="checkbox" id="selectAllEmployees" onclick="toggleAllEmployees(this)"> <strong>Select All</strong>
+            </label>
+            <hr style="margin:6px 0;">
             <%
                 List<Employee> employees = (List<Employee>) request.getAttribute("employees");
                 for (Employee e : employees) {
             %>
-            <option value="<%= e.getUserId() %>"><%= e.getName() %></option>
+            <label style="display:block; font-weight:normal; margin-bottom:6px;">
+                <input type="checkbox" name="employeeUserIds" value="<%= e.getUserId() %>" class="employeeCheckbox">
+                <%= e.getName() %>
+            </label>
             <% } %>
-        </select><br><br>
+        </div>
+        <br>
 
-        <button type="submit">Assign Task</button>
+        <button type="submit">Assign Task to Selected</button>
     </form>
+
+    <script>
+        function toggleAllEmployees(source) {
+            var checkboxes = document.getElementsByClassName('employeeCheckbox');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
 
     <br><a href="adminDashboard.jsp">Back to Dashboard</a>
 </body>

@@ -1,4 +1,3 @@
-
 package servlets;
 
 import util.DBConnection;
@@ -18,7 +17,19 @@ public class AssignTaskServlet extends HttpServlet {
             throws ServletException, IOException {
 
         int taskId = Integer.parseInt(request.getParameter("taskId"));
-        int employeeUserId = Integer.parseInt(request.getParameter("employeeUserId"));
+        String[] employeeUserIds = request.getParameterValues("employeeUserIds");
+
+        if (employeeUserIds != null) {
+            for (String idStr : employeeUserIds) {
+                int employeeUserId = Integer.parseInt(idStr);
+                assignAndNotify(taskId, employeeUserId);
+            }
+        }
+
+        response.sendRedirect("TaskManageServlet");
+    }
+
+    private void assignAndNotify(int taskId, int employeeUserId) {
 
         String sql = "INSERT INTO employee_tasks (employee_id, task_id, status) VALUES (?, ?, 'PENDING')";
         try (Connection conn = DBConnection.getConnection();
@@ -30,7 +41,6 @@ public class AssignTaskServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // Get employee's email and task title, then send notification
         String fetchSql = "SELECT u.email AS email, u.name AS name, t.title AS title " +
                            "FROM users u, tasks t WHERE u.id = ? AND t.id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -56,7 +66,5 @@ public class AssignTaskServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        response.sendRedirect("TaskManageServlet");
     }
 }
