@@ -1,3 +1,4 @@
+
 package util;
 
 import java.net.URI;
@@ -7,30 +8,35 @@ import java.net.http.HttpResponse;
 
 public class EmailUtil {
 
-    private static final String API_KEY = System.getenv("SENDGRID_API_KEY") != null
-            ? System.getenv("SENDGRID_API_KEY") : "your_sendgrid_api_key_here";
-    private static final String FROM_EMAIL = System.getenv("MAIL_FROM") != null
-            ? System.getenv("MAIL_FROM") : "your_verified_sender_email_here";
+    // Read ONLY from environment variables. Never type real keys or emails as fallbacks in code.
+    private static final String API_KEY = System.getenv("BREVO_API_KEY");
+    private static final String FROM_EMAIL = System.getenv("MAIL_FROM");
 
     public static void sendEmail(String toEmail, String subject, String body) {
+        if (API_KEY == null || API_KEY.isBlank() || FROM_EMAIL == null || FROM_EMAIL.isBlank()) {
+            System.out.println("Email NOT sent: set BREVO_API_KEY and MAIL_FROM environment variables.");
+            return;
+        }
+
         try {
             String jsonBody = "{"
-                    + "\"personalizations\":[{\"to\":[{\"email\":\"" + toEmail + "\"}]}],"
-                    + "\"from\":{\"email\":\"" + FROM_EMAIL + "\"},"
+                    + "\"sender\":{\"email\":\"" + FROM_EMAIL + "\"},"
+                    + "\"to\":[{\"email\":\"" + toEmail + "\"}],"
                     + "\"subject\":\"" + escapeJson(subject) + "\","
-                    + "\"content\":[{\"type\":\"text/plain\",\"value\":\"" + escapeJson(body) + "\"}]"
+                    + "\"textContent\":\"" + escapeJson(body) + "\""
                     + "}";
 
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.sendgrid.com/v3/mail/send"))
-                    .header("Authorization", "Bearer " + API_KEY)
-                    .header("Content-Type", "application/json")
+                    .uri(URI.create("https://api.brevo.com/v3/smtp/email"))
+                    .header("accept", "application/json")
+                    .header("api-key", API_KEY)
+                    .header("content-type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("SendGrid API response: " + response.statusCode() + " " + response.body());
+            System.out.println("Email API response: " + response.statusCode() + " " + response.body());
 
         } catch (Exception e) {
             e.printStackTrace();
