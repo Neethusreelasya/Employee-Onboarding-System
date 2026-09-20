@@ -136,7 +136,8 @@
         <li><a href="MyProgressServlet">Progress</a></li>
         <li><a href="MyLeavesServlet">My Leaves</a></li>
     <li><a href="MyResignationServlet">My Resignation</a></li>
-    </ul>
+    <li><a href="MyProfileServlet">My Profile</a></li>
+</ul>
     <a href="LogoutServlet">Logout</a>
 
     <!-- ===== Onboarding assistant (fixed at the bottom-right, does not move the page content) ===== -->

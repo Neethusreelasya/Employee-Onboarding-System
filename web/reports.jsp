@@ -12,7 +12,8 @@
     %>
     <p>Total Employees: <%= request.getAttribute("totalEmployees") %></p>
     <p>Pending Tasks: <%= request.getAttribute("pendingTasks") %></p>
-    <p>Completed Tasks: <%= request.getAttribute("completedTasks") %></p>
+   
+   <p>Submitted Tasks (awaiting verification): <%= request.getAttribute("submittedTasks") %></p>
     <p>Average Progress:</p>
     <div class="progress-bar-container">
         <div class="progress-bar-fill" id="avgProgressFill">

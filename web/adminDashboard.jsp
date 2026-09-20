@@ -33,7 +33,8 @@
 <li><a href="ExitChecklistServlet">Exit Checklist</a></li>
     <li><a href="HRTerminationServlet">Termination Approvals</a></li>
 <li><a href="TerminationChecklistServlet">Termination Exit Checklist</a></li>
-    
+    <li><a href="ApplyHikeServlet">Apply Hike</a></li>
+<li><a href="PromoteEmployeeServlet">Promote Employee</a></li>
     </ul>
     <a href="LogoutServlet">Logout</a>
 </body>
